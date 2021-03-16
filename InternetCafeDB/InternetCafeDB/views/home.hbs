@@ -1,0 +1,110 @@
+{{> navbarPar}}
+
+
+
+<div class="centered">
+  <div class="greeting">
+    <h1><b class="bigtitle">Excellent Era</b><br> The place where games and reality becomes one.</h1>
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Name </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="customer_name">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Email </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="customer_email">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="customer_phone">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Date </span>
+    </div>
+    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="reservation_date">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Start </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="reservation_time_start">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">End  </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="reservation_time_end">
+  </div>
+
+</div>
+<div class ="centered-button">
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedShow()">Show Stations</button>
+</div>
+
+<script type="text/javascript"> 
+
+    function btnPressedShow(){
+        
+        var customer_name = document.getElementById("customer_name").value;
+        var customer_email = document.getElementById("customer_email").value;
+        var customer_phone = document.getElementById("customer_phone").value;
+        var reservation_date = document.getElementById("reservation_date").value;
+        var reservation_time_start = document.getElementById("reservation_time_start").value;
+        var reservation_time_end = document.getElementById("reservation_time_end").value;
+        var url_params = '?name=' + customer_name + '&email=' + customer_email + '&phone=' + customer_phone;
+        $.ajax({
+            url : 'http://localhost:3000/database/customer/CreateCustomer',
+            method : 'put',
+            data : JSON.stringify({
+                name: customer_name,
+                email: customer_email,
+                phone: customer_phone
+
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            complete: function(result){
+                $.ajax({
+                    url : 'http://localhost:3000/database/customer/GetCustomer' + url_params,
+                    type : 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resultGet) {
+                        
+                        console.log(resultGet[0].id);
+                        $.ajax({
+                          url : 'http://localhost:3000/database/reservationinfo/CreateReservationInfo',
+                          method : 'put',
+                          data : JSON.stringify({
+                              customer_id: resultGet[0].id,
+                              date: reservation_date,
+                              time_start: reservation_time_start,
+                              time_end: reservation_time_end
+                          }),
+                          dataType: 'json',
+                          contentType: "application/json; charset=utf-8",
+                          success: function(result){
+                            console.log(result);
+                            console.log(result);
+                            var rID = result.insertId;
+                            window.location = "/station/" + rID;
+                          }
+                      });
+                    }
+                });
+            }
+        });
+    }
+
+  </script>

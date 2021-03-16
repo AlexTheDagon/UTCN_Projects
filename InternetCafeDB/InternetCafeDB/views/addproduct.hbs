@@ -1,0 +1,165 @@
+{{> navbarPar}}
+<div class="centered">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Name       </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_pname">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Manufacturer</span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_mname">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Type        </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_tname">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Buy Price    </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_buy_price">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Sell Price    </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_sell_price">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Quantity    </span>
+    </div>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="addproduct_quantity">
+  </div>
+
+</div>
+<div class ="centered-button">
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedAdd()">Add New Product</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedBuy()">Buy</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedSell()">Sell</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedDelete()">Delete Product</button>
+</div>
+
+<script type="text/javascript"> 
+
+    function btnPressedAdd(){
+        
+        var ap_pname = document.getElementById("addproduct_pname").value;
+        var ap_mname = document.getElementById("addproduct_mname").value;
+        var ap_tname = document.getElementById("addproduct_tname").value;
+        var ap_buy_price = document.getElementById("addproduct_buy_price").value;
+        var ap_sell_price = document.getElementById("addproduct_sell_price").value;
+        var ap_quantity = document.getElementById("addproduct_quantity").value;
+        $.ajax({
+            url : 'http://localhost:3000/database/products/AddProduct',
+            method : 'put',
+            data : JSON.stringify({
+                name: ap_pname,
+                type: ap_tname,
+                manufacturer: ap_mname,
+                buy_price: ap_buy_price,
+                sell_price: ap_sell_price
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result)
+                location.reload();
+            }
+        });
+        
+    }
+
+    function btnPressedBuy(){
+        
+        var ap_pname = document.getElementById("addproduct_pname").value;
+        var ap_mname = document.getElementById("addproduct_mname").value;
+        var ap_tname = document.getElementById("addproduct_tname").value;
+        var ap_buy_price = document.getElementById("addproduct_buy_price").value;
+        var ap_sell_price = document.getElementById("addproduct_sell_price").value;
+        var ap_quantity = document.getElementById("addproduct_quantity").value;
+        $.ajax({
+            url : 'http://localhost:3000/database/products/UpdateQuantity',
+            method : 'put',
+            data : JSON.stringify({
+                name: ap_pname,
+                type: ap_tname,
+                manufacturer: ap_mname,
+                quantity: ap_quantity
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result)
+                location.reload();
+            }
+        });
+        
+    }
+
+    function btnPressedSell(){
+        
+        var ap_pname = document.getElementById("addproduct_pname").value;
+        var ap_mname = document.getElementById("addproduct_mname").value;
+        var ap_tname = document.getElementById("addproduct_tname").value;
+        var ap_buy_price = document.getElementById("addproduct_buy_price").value;
+        var ap_sell_price = document.getElementById("addproduct_sell_price").value;
+        var ap_quantity = -document.getElementById("addproduct_quantity").value;
+        $.ajax({
+            url : 'http://localhost:3000/database/products/UpdateQuantity',
+            method : 'put',
+            data : JSON.stringify({
+                name: ap_pname,
+                type: ap_tname,
+                manufacturer: ap_mname,
+                quantity: ap_quantity
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result)
+                location.reload();
+            }
+        });
+        
+    }
+
+    function btnPressedDelete(){
+        
+        var ap_pname = document.getElementById("addproduct_pname").value;
+        var ap_mname = document.getElementById("addproduct_mname").value;
+        var ap_tname = document.getElementById("addproduct_tname").value;
+        var ap_buy_price = document.getElementById("addproduct_buy_price").value;
+        var ap_sell_price = document.getElementById("addproduct_sell_price").value;
+        var ap_quantity = document.getElementById("addproduct_quantity").value;
+        $.ajax({
+            url : 'http://localhost:3000/database/products/DeleteProduct',
+            method : 'put',
+            data : JSON.stringify({
+                name: ap_pname,
+                type: ap_tname,
+                manufacturer: ap_mname,
+                buy_price: ap_buy_price,
+                sell_price: ap_sell_price
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log("GOOD");
+                location.reload();
+            }
+        });
+        
+    }
+
+  </script>

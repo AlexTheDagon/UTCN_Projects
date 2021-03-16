@@ -1,0 +1,51 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body class="padding-bottom-5"></body>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/img/logo.png" alt="" width="90" height="90">
+    </a>
+
+    <a class="navbar-brand" href="#"><b>Excellent Era</b></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+    
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/addproduct">Add Product</a>
+        </li>
+      </ul>
+    </div>
+    <span class="navbar-text">   
+        <a class="nav-link" href="#">Let the gaming begin!</a>
+    </span>
+    <form class="form-inline" name="game">
+      <input class="form-control mr-sm-2" type="text" id="GAMENAMEFORFUCKSAKE" placeholder="Search" aria-label="Search">
+    </form>
+    <button class="btn btn-outline-success my-2 my-sm-0" type=" button" onclick="btnPressed()">Search</button>
+  </div>
+
+
+  <script type="text/javascript"> 
+
+      function btnPressed(){
+        
+        var gamename = document.getElementById("GAMENAMEFORFUCKSAKE").value;
+        console.log(gamename);
+        window.location = "/products/search/" + gamename;
+    }
+
+  </script>
+</nav>
+

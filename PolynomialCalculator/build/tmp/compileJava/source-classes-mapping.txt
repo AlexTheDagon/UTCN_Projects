@@ -1,0 +1,10 @@
+Main.java
+ Main
+view/GUI.java
+ view.GUI
+model/Monomial.java
+ model.Monomial
+model/Polynomial.java
+ model.Polynomial
+controller/Controller.java
+ controller.Controller

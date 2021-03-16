@@ -1,0 +1,35 @@
+.basic-grid {
+    display: grid;
+    padding-left: 20px;
+    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+ }
+
+ .navbar {
+    margin-bottom: 20px;
+  }
+
+  .centered {
+     width: 40vw;
+     margin: auto;
+  }
+
+  .centered-button {
+   width: 20vw;
+   margin: auto;
+  }
+
+  .greeting {
+   left: 0;
+   line-height: 200px;
+   margin-top: 100px;
+   margin-bottom: 100px;
+   position: relative;
+   text-align: center;
+   top: 50%;
+   width: 100%;
+  }
+
+  .bigtitle {
+      font-size: 40px;
+  }

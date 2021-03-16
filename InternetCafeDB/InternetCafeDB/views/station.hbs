@@ -1,0 +1,52 @@
+{{> navbarPar}}
+
+
+
+
+
+<section class="basic-grid">
+    {{#each station}}
+    <div class="card border-dark mb-3 " style="width: 18rem;">
+        <img class="card-img-top" src="/img/station.png" alt="Card image cap">
+        <div class="card-body">
+            <h3 class="card-title text-center">Station {{id}}</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">Type: {{tname}}</li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-dark" onclick="btnPressedAddRes({{id}})">Reserve</button>
+    </div>
+    {{/each}}
+</section>
+
+<div class ="centered-button">
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="btnPressedGoHome()">Finalise Reservation</button>
+</div>
+
+
+<script type="text/javascript"> 
+
+    function btnPressedAddRes(sID){
+        
+        var rID = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        $.ajax({
+            url : 'http://localhost:3000/database/reservations/AddReservation',
+            method : 'put',
+            data : JSON.stringify({
+                reservation_id: rID,
+                station_id: sID
+            }),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result)
+                location.reload();
+            }
+        });
+    }
+
+    function btnPressedGoHome(){
+        window.location = "/";
+    }
+
+  </script>
